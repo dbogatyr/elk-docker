@@ -1,0 +1,11 @@
+- name: Install docker
+  include_tasks: docker.yml
+
+- name: Configure volumes and data directory
+  include_tasks: volumes.yml
+
+- name: Ufw update
+  include_tasks: ufw.yml
+
+- name: Deploy elasticsearch
+  include_tasks: elasticsearch.yml

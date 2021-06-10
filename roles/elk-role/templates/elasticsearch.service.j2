@@ -1,0 +1,22 @@
+[Unit]
+Description=Elasticsearch Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+User=elasticsearch
+RestartForceExitStatus = 0
+StartLimitInterval = 20
+StartLimitBurst = 5
+TimeoutStartSec = 600
+TimeoutStopSec = 30
+Restart = always
+RestartSec = 10
+ExecStartPre=/usr/bin/docker pull docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+ExecStart=/usr/bin/docker run -d --name %n -p 9200:9200 -p 9300:9300 -v elasticsearch:/opt/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+ExecStop=-/usr/bin/docker stop %n
+ExecStopPost=-/usr/bin/docker rm %n
+
+
+[Install]
+WantedBy=multi-user.target

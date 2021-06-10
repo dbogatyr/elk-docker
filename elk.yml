@@ -1,0 +1,5 @@
+---
+- hosts: elk-host
+  become: True
+  roles:
+    - elk-role
