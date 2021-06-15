@@ -1,3 +1,7 @@
+- name: Create a network
+  docker_network:
+    name: elastic
+    
 - name: Create a volume
   docker_volume:
     name: elasticsearch-data

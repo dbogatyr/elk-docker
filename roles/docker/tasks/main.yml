@@ -1,0 +1,5 @@
+- name: Install docker
+  include_tasks: docker.yml
+
+- name: Configure volumes and data directory, network
+  include_tasks: configuration.yml

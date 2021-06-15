@@ -10,7 +10,7 @@
 
 - name: Copy template systemd
   template: src=elasticsearch.service.j2 dest=/etc/systemd/system/elasticsearch.service owner=root group=root mode=0644
-  notify: "reload systemd"
+  notify: reload systemd
 
 - name: restart elasticsearch
   service:

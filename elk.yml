@@ -2,4 +2,7 @@
 - hosts: elk-host
   become: True
   roles:
-    - elk-role
+    - { role: docker, tags: ["docker"] }
+    - { role: ufw, tags: ["firewall"] }
+    - { role: elasticsearch, tags: ["elastic"] }
+    - { role: kibana, tags: ["kibana"] }
