@@ -13,9 +13,9 @@ TimeoutStopSec = 30
 Restart = always
 RestartSec = 10
 ExecStartPre=/usr/bin/docker pull docker.elastic.co/elasticsearch/elasticsearch:7.6.2
-ExecStart=/usr/bin/docker run -d --network=elastic --name %n -p 9200:9200 -p 9300:9300 -v elasticsearch:/opt/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.6.2
-ExecStop=-/usr/bin/docker stop %n
-ExecStopPost=-/usr/bin/docker rm %n
+ExecStart=/usr/bin/docker run --network=elastic --name %N -p 9200:9200 -p 9300:9300 -v elasticsearch-data:/opt/elasticsearch/data -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.6.2
+ExecStop=-/usr/bin/docker stop %N
+ExecStopPost=-/usr/bin/docker rm %N
 
 
 [Install]
