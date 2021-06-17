@@ -12,6 +12,9 @@
   template: src=kibana.service.j2 dest=/etc/systemd/system/kibana.service owner=root group=root mode=0644
   notify: reload systemd
 
+- name: reload systemd
+  shell: systemctl daemon-reload
+  
 - name: restart kibana
   service:
     name: kibana.service

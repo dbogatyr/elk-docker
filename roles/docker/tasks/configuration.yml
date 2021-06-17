@@ -4,7 +4,10 @@
     
 - name: Create a volume
   docker_volume:
-    name: elasticsearch-data
+    name: '{{ item }}'
+  loop:
+    - elasticsearch-data
+    - elasticsearch-config
 
 - name: Create elasticsearch data directory
   ansible.builtin.file:
@@ -16,4 +19,10 @@
   ansible.builtin.file:
     src: /var/lib/docker/volumes/elasticsearch-data/_data
     dest: /opt/elasticsearch/data
+    state: link
+
+- name: Symbolic link to elasticsearch config directory from docker volume
+  ansible.builtin.file:
+    src: /var/lib/docker/volumes/elasticsearch-config/_data
+    dest: /opt/elasticsearch/config
     state: link
