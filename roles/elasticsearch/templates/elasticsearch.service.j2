@@ -20,6 +20,7 @@ ExecStart=/usr/bin/docker run \
                             -p 9300:9300 \
                             -v elasticsearch-data:/usr/share/elasticsearch/data \
                             -v elasticsearch-config:/usr/share/elasticsearch/config \
+                            -v elasticsearch-bin:/usr/share/elasticsearch/bin \
                             -e "discovery.type=single-node" \
                             docker.elastic.co/elasticsearch/elasticsearch:7.6.2
 ExecStop=-/usr/bin/docker stop %N

@@ -8,12 +8,21 @@
   loop:
     - elasticsearch-data
     - elasticsearch-config
+    - elasticsearch-bin
+    - kibana-dir
 
 - name: Create elasticsearch data directory
   ansible.builtin.file:
     path: /opt/elasticsearch/
     state: directory
     mode: '0774'
+
+- name: Create kibana data directory
+  ansible.builtin.file:
+    path: /opt/kibana/
+    state: directory
+    mode: '0774'
+
 
 - name: Symbolic link to elasticsearch data directory from docker volume
   ansible.builtin.file:
@@ -25,4 +34,16 @@
   ansible.builtin.file:
     src: /var/lib/docker/volumes/elasticsearch-config/_data
     dest: /opt/elasticsearch/config
+    state: link
+
+- name: Symbolic link to elasticsearch bin directory from docker volume
+  ansible.builtin.file:
+    src: /var/lib/docker/volumes/elasticsearch-bin/_data
+    dest: /opt/elasticsearch/bin
+    state: link
+
+- name: Symbolic link to kibana dir directory from docker volume
+  ansible.builtin.file:
+    src: /var/lib/docker/volumes/kibana-dir/_data
+    dest: /opt/kibana/data
     state: link
